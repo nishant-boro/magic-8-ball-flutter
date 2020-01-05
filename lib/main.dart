@@ -1,20 +1,45 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() => runApp(
-      MaterialApp(
-        title: 'Magic 8 ball',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: MyHomePage(title: 'Ask Me Anything'),
+  MaterialApp(
+    home: Scaffold(
+      backgroundColor: Colors.blue,
+      appBar: AppBar(
+        title: Text('Ask Me Anything'),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+      ),
+      body: Main(),
+    ),
+  ),
+);
+
+class Main extends StatefulWidget {
+  @override
+  MainState createState() => MainState();
+}
+
+class MainState extends State<Main> {
+  int ballNo = 1;
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: FlatButton(
+                onPressed: () {
+                  setState(() {
+                    ballNo = Random().nextInt(4) + 1;
+                  });
+                },
+                child: Image.asset('images/ball$ballNo.png')),
+          ),
+        ],
       ),
     );
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
+  }
 }
+
+
